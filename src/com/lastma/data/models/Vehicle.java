@@ -3,6 +3,8 @@ package com.lastma.data.models;
 public class Vehicle {
     private String model;
     private String brand;
+    private String year;
+    private int id;
 
     public String getYear() {
         return year;
@@ -12,12 +14,12 @@ public class Vehicle {
         this.year = year;
     }
 
-    public String getPlateNumber() {
-        return plateNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBrand() {
@@ -35,7 +37,5 @@ public class Vehicle {
     public void setModel(String model) {
         this.model = model;
     }
-
-    private String year;
-    private String plateNumber;
+    
 }

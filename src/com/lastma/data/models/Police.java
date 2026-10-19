@@ -4,6 +4,9 @@ public class Police {
     private String fullName;
     private String email;
     private int id;
+    private String password;
+
+
 
     public int getId() {
         return id;
@@ -21,12 +24,18 @@ public class Police {
         this.email = email;
     }
 
-    public String getFullname() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullName = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    public String getPassword() {
+        return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

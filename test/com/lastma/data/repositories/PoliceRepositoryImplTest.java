@@ -14,6 +14,7 @@ class PoliceRepositoryImplTest {
     public void setUp() {
         policeRepository = new PoliceRepositoryImpl();
         police = new Police();
+        policeRepository.deleteAll();
     }
 
     @Test

@@ -8,4 +8,6 @@ public interface DriverRepository {
     Driver findById(int id);
     void del(int id);
     boolean existById(int driverId);
+
+    Driver findByEmail(String email);
 }

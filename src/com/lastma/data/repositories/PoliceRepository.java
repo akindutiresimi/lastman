@@ -8,4 +8,7 @@ public interface PoliceRepository {
     Police findById(int id);
     void del(int id);
     boolean existById(int policeId);
+    void deleteAll();
+
+    Police findByEmail(String email);
 }

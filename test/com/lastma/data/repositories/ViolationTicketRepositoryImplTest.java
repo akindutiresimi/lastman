@@ -14,7 +14,7 @@ class ViolationTicketRepositoryImplTest {
     public void setUp() {
         ticketRepository = new ViolationTicketRepositoryImpl();
         ticket = new ViolationTicket();
-        ticket.setPlateNumber("ABC-123");
+        ticket.setId(1);
     }
 
     @Test
@@ -28,9 +28,9 @@ class ViolationTicketRepositoryImplTest {
     public void testThatWhenTwoTicketsAreSaved_countAddTwo() {
         assertEquals(0L, ticketRepository.count());
         ViolationTicket ticketOne = new ViolationTicket();
-        ticketOne.setPlateNumber("ABC-123");
+        ticketOne.setId(1);
         ViolationTicket ticketTwo = new ViolationTicket();
-        ticketTwo.setPlateNumber("XYZ-789");
+        ticketTwo.setId(2);
         ticketRepository.save(ticketOne);
         ticketRepository.save(ticketTwo);
         assertEquals(2L, ticketRepository.count());
@@ -39,36 +39,36 @@ class ViolationTicketRepositoryImplTest {
     @Test
     public void testThatWhenIFindByPlateNumber_ticketIsFound() {
         ViolationTicket savedTicket = ticketRepository.save(ticket);
-        String plateNumber = savedTicket.getPlateNumber();
-        assertEquals(savedTicket, ticketRepository.findById(plateNumber));
+        int id  = savedTicket.getId();
+        assertEquals(savedTicket, ticketRepository.findById(id));
     }
 
     @Test
     public void testThatWhenIDeleteTicket_countGoesBackToZero() {
         ticketRepository.save(ticket);
-        ticketRepository.del("ABC-123");
+        ticketRepository.del(1);
         assertEquals(0L, ticketRepository.count());
     }
 
     @Test
     public void testThatWhenIDeleteOneOfTwoTickets_theOtherRemains() {
         ViolationTicket ticketTwo = new ViolationTicket();
-        ticketTwo.setPlateNumber("XYZ-789");
+        ticketTwo.setId(2);
         ticketRepository.save(ticket);
         ticketRepository.save(ticketTwo);
-        ticketRepository.del("XYZ-789");
+        ticketRepository.del(2);
         assertEquals(1L, ticketRepository.count());
-        assertTrue(ticketRepository.existById("ABC-123"));
+        assertTrue(ticketRepository.existById(1));
     }
 
     @Test
     public void testThatWhenICheckExistByTicketPlate_itReturnsTrue() {
         ViolationTicket savedTicket = ticketRepository.save(ticket);
-        assertTrue(ticketRepository.existById(savedTicket.getPlateNumber()));
+        assertTrue(ticketRepository.existById(savedTicket.getId()));
     }
 
     @Test
     public void testThatWhenICheckNonExistingTicketPlate_itReturnsFalse() {
-        assertFalse(ticketRepository.existById("WRONG-000"));
+        assertFalse(ticketRepository.existById(5));
     }
 }

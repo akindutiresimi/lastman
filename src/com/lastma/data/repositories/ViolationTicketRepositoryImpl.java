@@ -15,7 +15,7 @@ public class ViolationTicketRepositoryImpl implements ViolationTicketRepository 
 
     @Override
     public ViolationTicket save(ViolationTicket ticket) {
-        ViolationTicket existing = findById(ticket.getPlateNumber());
+        ViolationTicket existing = findById(ticket.getId());
         if (existing != null) {
             tickets.remove(existing);
         }
@@ -24,9 +24,9 @@ public class ViolationTicketRepositoryImpl implements ViolationTicketRepository 
     }
 
     @Override
-    public ViolationTicket findById(String id) {
+    public ViolationTicket findById(int id) {
         for (ViolationTicket ticket : tickets) {
-            if (ticket.getPlateNumber().equals(id)) {
+            if (ticket.getId() == id) {
                 return ticket;
             }
         }
@@ -34,12 +34,12 @@ public class ViolationTicketRepositoryImpl implements ViolationTicketRepository 
     }
 
     @Override
-    public void del(String id) {
-        tickets.removeIf(ticket -> ticket.getPlateNumber().equals(id));
+    public void del(int id) {
+        tickets.removeIf(ticket -> ticket.getId()==id);
     }
 
     @Override
-    public boolean existById(String id) {
+    public boolean existById(int id) {
         return findById(id) != null;
     }
 

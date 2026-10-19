@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PoliceRepositoryImpl implements PoliceRepository {
-    private final List<Police> polices = new ArrayList<>();
+    private static List<Police> polices = new ArrayList<>();
     private int numberOfPolices = 0;
 
     @Override
@@ -45,5 +45,20 @@ public class PoliceRepositoryImpl implements PoliceRepository {
             }
         }
         return false;
+    }
+
+    public void deleteAll() {
+        polices.clear();
+        numberOfPolices = 0;
+    }
+
+    @Override
+    public Police findByEmail(String email) {
+        for (Police police : polices){
+            if (police.getEmail().equals(email)){
+                return police;
+            }
+        }
+        return null;
     }
 }

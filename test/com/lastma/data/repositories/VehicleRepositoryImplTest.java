@@ -14,7 +14,7 @@ class VehicleRepositoryImplTest {
     public void setUp() {
         vehicleRepository = new VehicleRepositoryImpl();
         vehicle = new Vehicle();
-        vehicle.setPlateNumber("ABC-123");
+        vehicle.setId(1);
     }
 
     @Test
@@ -28,59 +28,59 @@ class VehicleRepositoryImplTest {
     public void testThatWhenTwoVehiclesAreSaved_countAddTwo() {
         assertEquals(0L, vehicleRepository.count());
         Vehicle vehicleOne = new Vehicle();
-        vehicleOne.setPlateNumber("ABC-123");
+        vehicleOne.setId(1);
         Vehicle vehicleTwo = new Vehicle();
-        vehicleTwo.setPlateNumber("XYZ-789");
+        vehicleTwo.setId(2);
         vehicleRepository.save(vehicleOne);
         vehicleRepository.save(vehicleTwo);
         assertEquals(2L, vehicleRepository.count());
     }
 
     @Test
-    public void testThatWhenFindByIncorrectPlateNumber_errorIsThrown() {
+    public void testThatWhenFindByIncorrectId_errorIsThrown() {
         vehicleRepository.save(vehicle);
-        assertThrows(IllegalArgumentException.class, () -> vehicleRepository.findById("WRONG-000"));
+        assertThrows(IllegalArgumentException.class, () -> vehicleRepository.findById(5));
     }
 
     @Test
-    public void testThatWhenIFindByPlateNumber_vehicleIsFound() {
+    public void testThatWhenIFindById_vehicleIsFound() {
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
-        String plateNumber = savedVehicle.getPlateNumber();
-        assertEquals(savedVehicle, vehicleRepository.findById(plateNumber));
+        int id = savedVehicle.getId();
+        assertEquals(savedVehicle, vehicleRepository.findById(id));
     }
 
     @Test
     public void testThatWhenIDeleteVehicle_countGoesBackToZero() {
         vehicleRepository.save(vehicle);
-        vehicleRepository.del("ABC-123");
+        vehicleRepository.del(1);
         assertEquals(0L, vehicleRepository.count());
     }
 
     @Test
-    public void testThatWhenIDeletePlateNumberThatDoesNotExist_errorIsThrown() {
+    public void testThatWhenIDeleteIdThatDoesNotExist_errorIsThrown() {
         vehicleRepository.save(vehicle);
-        assertThrows(IllegalArgumentException.class, () -> vehicleRepository.del("WRONG-000"));
+        assertThrows(IllegalArgumentException.class, () -> vehicleRepository.del(5));
     }
 
     @Test
     public void testThatWhenIDeleteOneOfTwoVehicles_theOtherRemains() {
         Vehicle vehicleTwo = new Vehicle();
-        vehicleTwo.setPlateNumber("XYZ-789");
+        vehicleTwo.setId(2);
         vehicleRepository.save(vehicle);
         vehicleRepository.save(vehicleTwo);
-        vehicleRepository.del("XYZ-789");
+        vehicleRepository.del(2);
         assertEquals(1L, vehicleRepository.count());
-        assertTrue(vehicleRepository.existById("ABC-123"));
+        assertTrue(vehicleRepository.existById(1));
     }
 
     @Test
     public void testThatWhenICheckExistByVehiclePlate_itReturnsTrue() {
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
-        assertTrue(vehicleRepository.existById(savedVehicle.getPlateNumber()));
+        assertTrue(vehicleRepository.existById(savedVehicle.getId()));
     }
 
     @Test
     public void testThatWhenICheckNonExistingVehiclePlate_itReturnsFalse() {
-        assertFalse(vehicleRepository.existById("WRONG-000"));
+        assertFalse(vehicleRepository.existById(5));
     }
 }

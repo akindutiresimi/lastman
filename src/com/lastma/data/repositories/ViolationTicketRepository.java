@@ -6,7 +6,7 @@ import com.lastma.data.models.ViolationTicket;
 public interface ViolationTicketRepository {
     long count();
     ViolationTicket save(ViolationTicket ticket);
-    ViolationTicket findById(String id);
-    void del(String id);
-    boolean existById(String id);
+    ViolationTicket findById(int id);
+    void del(int id);
+    boolean existById(int id);
 }

@@ -3,7 +3,7 @@ package com.lastma.data.models;
 import java.util.Date;
 
 public class ViolationTicket {
-    private String plateNumber;
+    private int id;
     private Date dateIssue;
     private String offence;
     private int fineAmount;
@@ -16,12 +16,12 @@ public class ViolationTicket {
         this.dateIssue = dateIssue;
     }
 
-    public String getPlateNumber() {
-        return plateNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getFineAmount() {
@@ -39,5 +39,5 @@ public class ViolationTicket {
     public void setOffence(String offence) {
         this.offence = offence;
     }
-
+    
 }

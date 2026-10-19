@@ -14,6 +14,7 @@ class DriverRepositoryImplTest {
     public void setUp() {
         driverRepository = new DriverRepositoryImpl();
         driver = new Driver();
+        driverRepository.deleteAll();
     }
 
     @Test

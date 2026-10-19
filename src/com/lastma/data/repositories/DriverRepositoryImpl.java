@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DriverRepositoryImpl implements DriverRepository{
-    private List<Driver> drivers = new ArrayList<>();
+    private static List<Driver> drivers = new ArrayList<>();
     private int numberOfDrivers = 0;
 
     @Override
@@ -55,4 +55,18 @@ public class DriverRepositoryImpl implements DriverRepository{
         return false;
     }
 
+    @Override
+    public Driver findByEmail(String email) {
+        for (Driver driver : drivers){
+            if(driver.getEmail().equals(email)){
+                return driver;
+            }
+        }
+        return null;
+    }
+
+    public void deleteAll() {
+        drivers.clear();
+        numberOfDrivers = 0;
+    }
 }

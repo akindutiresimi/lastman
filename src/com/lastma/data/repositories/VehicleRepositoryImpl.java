@@ -21,25 +21,25 @@ public class VehicleRepositoryImpl implements VehicleRepository {
     }
 
     @Override
-    public Vehicle findById(String plateNumber) {
+    public Vehicle findById(int id) {
         for (Vehicle vehicle : vehicles) {
-            if (Objects.equals(vehicle.getPlateNumber(), plateNumber)) {
+            if (vehicle.getId() == id) {
                 return vehicle;
             }
         }
-        throw new IllegalArgumentException("Vehicle with plate number " + plateNumber + " not found");
+        throw new IllegalArgumentException("Vehicle with plate number " + id + " not found");
     }
 
     @Override
-    public void del(String plateNumber) {
-        Vehicle vehicle = findById(plateNumber);
+    public void del(int id) {
+        Vehicle vehicle = findById(id);
         vehicles.remove(vehicle);
     }
 
     @Override
-    public boolean existById(String plateNumber) {
+    public boolean existById(int id) {
         for (Vehicle vehicle : vehicles) {
-            if (Objects.equals(vehicle.getPlateNumber(), plateNumber)) {
+            if (vehicle.getId() == id) {
                 return true;
             }
         }

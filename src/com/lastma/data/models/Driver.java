@@ -2,6 +2,9 @@ package com.lastma.data.models;
 
 public class Driver {
     private String fullName;
+    private String email;
+    private int id;
+    private String password;
 
     public String getEmail() {
         return email;
@@ -27,7 +30,11 @@ public class Driver {
         this.fullName = fullName;
     }
 
-    private String email;
-    private int id;
+    public void setPassword(String password) {
 
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
