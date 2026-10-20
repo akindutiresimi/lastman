@@ -18,6 +18,9 @@ public class DriverServiceImpl implements DriverService {
         newDriver.setEmail(email);
         newDriver.setPassword(password);
         driverRepository.save(newDriver);
+
     }
+
+
 
 }
